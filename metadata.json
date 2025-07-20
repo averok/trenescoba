@@ -1,5 +1,6 @@
 {
   "name": "TrenEscoba",
   "description": "Aplicación para anotar las estaciones en las que ha de parar el tren escoba.",
-  "requestFramePermissions": []
+  "requestFramePermissions": [],
+  "prompt": ""
 }

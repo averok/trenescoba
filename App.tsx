@@ -83,15 +83,15 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-900 text-slate-100 p-4 sm:p-6 lg:p-8 flex flex-col">
+    <div className="min-h-screen bg-slate-900 text-slate-100 p-4 flex flex-col">
       <div className="max-w-7xl mx-auto w-full">
-        <header className="text-center mb-10">
-          <h1 className="text-4xl sm:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-blue-500">
+        <header className="text-center mb-4">
+          <h1 className="text-3xl sm:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-blue-500">
             Tren Escoba
           </h1>
         </header>
         
-        <main className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <main className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <Checklist 
             title="ZONA A"
             items={zonaA}
@@ -109,7 +109,7 @@ const App: React.FC = () => {
         </main>
       </div>
 
-      <footer className="mt-auto pt-10">
+      <footer className="mt-auto pt-4">
         <div className="max-w-7xl mx-auto flex justify-center">
             {isEditing ? (
                  <button 

@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { CheckState } from '../types';
 
@@ -8,7 +9,7 @@ interface ThreeStateSwitchProps {
 }
 
 const ThreeStateSwitch: React.FC<ThreeStateSwitchProps> = ({ state, onChange, isReadOnly = false }) => {
-  const baseStyle = "w-12 h-8 flex items-center justify-center text-sm font-bold transition-all duration-200 ease-in-out focus:outline-none disabled:cursor-not-allowed";
+  const baseStyle = "w-10 h-7 flex items-center justify-center text-sm font-bold transition-all duration-200 ease-in-out focus:outline-none disabled:cursor-not-allowed";
   const inactiveStyle = `bg-slate-600 text-slate-400 ${!isReadOnly ? 'hover:bg-slate-500' : ''}`;
   
   const activeEffect = !isReadOnly ? 'scale-110 shadow-lg ring-2' : '';
