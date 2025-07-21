@@ -4,14 +4,22 @@ import { ZONA_A_ITEMS, ZONA_B_ITEMS } from './constants';
 import { CheckState, ListItem } from './types';
 import Checklist from './components/Checklist';
 
-const getInitialState = <T,>(key: string, fallback: T): T => {
+const getInitialState = (key: string, fallback: ListItem[]): ListItem[] => {
   try {
     const stored = localStorage.getItem(key);
     if (stored) {
-      const parsed = JSON.parse(stored);
-      // Basic validation to ensure the loaded data has the expected shape
-      if (Array.isArray(fallback) && Array.isArray(parsed) && parsed.length === fallback.length) {
-        return parsed as T;
+      const parsed = JSON.parse(stored) as ListItem[];
+      if (Array.isArray(parsed) && parsed.length === fallback.length) {
+        // Simple check for old format: first item's name doesn't start with a digit.
+        if (parsed[0] && parsed[0].name && !/^\d/.test(parsed[0].name)) {
+          // It's the old format, migrate it.
+          console.log(`Migrating data for key: ${key}`);
+          return fallback.map((newItem, index) => ({
+            ...newItem,
+            state: parsed[index] ? parsed[index].state : CheckState.Maybe,
+          }));
+        }
+        return parsed;
       }
     }
   } catch (error) {
@@ -22,8 +30,8 @@ const getInitialState = <T,>(key: string, fallback: T): T => {
 
 
 const App: React.FC = () => {
-  const initialZonaA = ZONA_A_ITEMS.map(name => ({ name, state: CheckState.Maybe }));
-  const initialZonaB = ZONA_B_ITEMS.map(name => ({ name, state: CheckState.Maybe }));
+  const initialZonaA = ZONA_A_ITEMS.map(station => ({ name: `${station.code} ${station.name}`, state: CheckState.Maybe }));
+  const initialZonaB = ZONA_B_ITEMS.map(station => ({ name: `${station.code} ${station.name}`, state: CheckState.Maybe }));
 
   const [zonaA, setZonaA] = useState<ListItem[]>(() => getInitialState('zonaA', initialZonaA));
   const [zonaB, setZonaB] = useState<ListItem[]>(() => getInitialState('zonaB', initialZonaB));
